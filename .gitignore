@@ -1,2 +1,2 @@
-./venv
-./cycleangel/cycleangel/settings/production.py
+venv
+cycleangel/cycleangel/settings/production.py

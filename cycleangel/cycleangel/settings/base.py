@@ -49,6 +49,7 @@ INSTALLED_APPS = (
 
     'search',
     'home',
+    'contentPage',
 )
 
 MIDDLEWARE_CLASSES = (

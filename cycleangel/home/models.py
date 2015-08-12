@@ -10,6 +10,13 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 class HomePage(Page):
     body = RichTextField(blank=True)
 
+    column1 = RichTextField(blank=True)
+    column2 = RichTextField(blank=True)
+    column3 = RichTextField(blank=True)
+
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
-    ]
+        FieldPanel('body', classname="full"),
+        FieldPanel('column1'),
+        FieldPanel('column2'),
+        FieldPanel('column3'),	
+	    ]

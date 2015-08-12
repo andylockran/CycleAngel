@@ -23,12 +23,57 @@
     <![endif]-->
   </head>
 
+
+
   <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
-    <div class"row">
-    {% block content %}
-    {% endblock %}
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/#">CycleAngel</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-right login-image">
+               {% if user and not user.is_anonymous %}
+                   <a class="btn" href="/account/">My Account</a>
+                   <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+               {% else %}
+                   <a class="center-block" href="{% url 'social:begin' 'strava' %}?next={{ request.path }}"><img src="{% static 'images/LoginWithStrava.png' %}"/></a>
+               {% endif %}
+          </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        {% block content %}
+          <h1>CycleAngel</h1>
+        {% endblock %}
+      </div>
     </div>
+{% block main %}
+{% endblock %}
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+      {%block columns %}
+        
+      {% endblock columns %}
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; CycleAngel 2015</p>
+      </footer>
+    </div> <!-- /container -->
 
     {# Global javascript #}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

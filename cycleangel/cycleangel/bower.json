@@ -1,0 +1,22 @@
+{
+  "name": "cycleangel",
+  "version": "0.0.1",
+  "authors": [
+    "andylockran <andy@zrmt.com>"
+  ],
+  "description": "CycleAngel",
+  "main": "static/css/cycleangel.css",
+  "license": "MIT",
+  "homepage": "www.zrmt.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

@@ -3,7 +3,20 @@ from __future__ import unicode_literals
 from django.db import models
 
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.fields import RichTextField 
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 
 class HomePage(Page):
-    pass
+    body = RichTextField(blank=True)
+
+    column1 = RichTextField(blank=True)
+    column2 = RichTextField(blank=True)
+    column3 = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname="full"),
+        FieldPanel('column1'),
+        FieldPanel('column2'),
+        FieldPanel('column3'),	
+	    ]

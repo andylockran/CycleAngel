@@ -47,8 +47,12 @@ INSTALLED_APPS = (
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
 
+    'social.apps.django_app.default',
+
     'search',
     'home',
+    'contentPage',
+    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -136,3 +142,13 @@ MEDIA_URL = '/media/'
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "cycleangel"
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.strava.StravaOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_STRAVA_KEY = '4822'
+SOCIAL_AUTH_STRAVA_SECRET = '33afd96a1c2e40799b71b0b068ed8c9422067bd0'
+
+LOGIN_REDIRECT_URL = '/'

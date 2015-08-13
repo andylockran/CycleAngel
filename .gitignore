@@ -1,2 +1,5 @@
 venv
 cycleangel/cycleangel/settings/production.py
+__pycache__
+bower_components
+node_modules

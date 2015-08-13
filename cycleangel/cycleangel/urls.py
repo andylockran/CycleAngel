@@ -12,8 +12,12 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^account/', include('account.urls')),
 
     url(r'^search/$', 'search.views.search', name='search'),
+
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
 
     url(r'', include(wagtail_urls)),
 ]

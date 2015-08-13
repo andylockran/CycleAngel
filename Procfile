@@ -1,1 +1,1 @@
-web: gunicorn wagtaildemo.heroku_wsgi --
+web: gunicorn --pythonpath cycleangel cycleangel.wsgi --

@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
 
     'social.apps.django_app.default',
+    'rest_framework',
 
     'search',
     'home',
@@ -151,4 +152,12 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_STRAVA_KEY = '4822'
 SOCIAL_AUTH_STRAVA_SECRET = '33afd96a1c2e40799b71b0b068ed8c9422067bd0'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/account'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

@@ -28,7 +28,7 @@ class Item(models.Model):
 	value = models.IntegerField(blank=False)
 	manufacturer = models.ForeignKey('Manufacturer')
 	variation = models.ForeignKey('Variation')
-	description = RichTextField
+	description = RichTextField()
 	transferable = models.BooleanField()
 
 	def __str__(self):

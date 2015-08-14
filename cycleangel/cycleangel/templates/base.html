@@ -47,7 +47,7 @@
                    <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
                {% else %}
                    <a class="center-block" href="{% url 'social:begin' 'strava' %}?next={{ request.path }}">
-                      <img src="{% static 'images/LoginWithStrava.png' %}" alt="Log in with Strava"/>
+                      <img src="{% static 'images/LogInWithStrava.png' %}" alt="Log in with Strava"/>
                     </a>
                {% endif %}
           </div><!--/.navbar-collapse -->

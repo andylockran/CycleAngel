@@ -5,7 +5,7 @@ import os
 env = os.environ.copy()
 SECRET_KEY = env['SECRET_KEY']
 
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_FILTERS = [

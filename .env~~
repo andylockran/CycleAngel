@@ -1,2 +1,2 @@
-DJANGO_SETTINGS_MODULE=cycleangel.settings.production
+DJANGO_SETTINGS_MODULE=project_title.settings.production
 SECRET_KEY='ahshskwjwhwhwkwlwhfklflflflflfjfnfbwhjtgjwjgfkwkfk3' #Replace this with your own randomly generated, 50 character key

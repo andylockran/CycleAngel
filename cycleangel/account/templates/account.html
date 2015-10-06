@@ -2,18 +2,11 @@
 
 {% load wagtailcore_tags %}
 
-
 {% block content %}
 
 <h1>{{ user.get_full_name }}</h1>
 
-{% endblock %}
-
-
-{% block columns %}
 <div class="col-md-6 offset-3">
-
-Welcome, {{user}}
+	Welcome, {{user}}
 </div>
-
 {% endblock %}

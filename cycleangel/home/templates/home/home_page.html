@@ -8,15 +8,3 @@
 	<h1>{{ self.title}}</h1>
     {{ self.body|richtext }}
 {% endblock %}
-
-{% block columns %}
-  <div class="col-md-4">
-	  {{ self.column1|richtext}}
-  </div>
-  <div class="col-md-4">
-    {{ self.column2|richtext }}
-	</div>
-  <div class="col-md-4">
-    {{ self.column3|richtext }}
-  </div>
-{% endblock columns %}

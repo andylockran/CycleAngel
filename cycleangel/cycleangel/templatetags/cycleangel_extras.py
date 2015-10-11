@@ -26,8 +26,7 @@ def top_menu(context, parent, calling_page=None):
         # We don't directly check if calling_page is None since the template
         # engine can pass an empty string to calling_page
         # if the variable passed as calling_page does not exist.
-        menuitem.active = (calling_page.url.startswith(menuitem.url)
-                           if calling_page else False)
+        menuitem.active = False
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,

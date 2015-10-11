@@ -6,9 +6,9 @@
 
 <div class="row col-md-12">
 	<h1>{{ user.get_full_name }}</h1>
-	<p>Welcome, {{user}}</p>
-	<p>{{body}}</p>
-	<pre>{% filter force_escape %}{% debug %}{% endfilter %}</pre>
+	<p>Welcome, {{user|capfirst}}</p>
+	{{self.body|richtext}}
+	<!--<pre>{% filter force_escape %}{% debug %}{% endfilter %}</pre> -->
 </div>
 
 {% endblock %}

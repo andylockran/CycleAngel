@@ -5,7 +5,24 @@ from django.contrib import admin
 
 from django.contrib.auth.models import User
 
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailsearch import index
+
+
+class AccountPage(Page):
+    date = models.DateField("Content date")
+    body = RichTextField(blank=True)
+
+    search_fields = Page.search_fields + (
+        index.SearchField('body'),
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        FieldPanel('body')
+    ]
 
 
 class Account(models.Model):

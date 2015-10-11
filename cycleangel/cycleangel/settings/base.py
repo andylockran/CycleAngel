@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'home',
     'contentPage',
     'account',
+    'news',
    
     'social.apps.django_app.default',
     'rest_framework',

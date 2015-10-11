@@ -12,17 +12,7 @@ from wagtail.wagtailsearch import index
 
 
 class AccountPage(Page):
-    date = models.DateField("Content date")
-    body = RichTextField(blank=True)
-
-    search_fields = Page.search_fields + (
-        index.SearchField('body'),
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('body')
-    ]
+	pass
 
 
 class Account(models.Model):

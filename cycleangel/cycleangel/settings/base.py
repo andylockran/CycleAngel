@@ -48,14 +48,16 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
     'wagtail.contrib.wagtailsearchpromotions',
 
-    'social.apps.django_app.default',
-    'rest_framework',
-    'debug_toolbar',
+
     'cycleangel',
     'search',
     'home',
     'contentPage',
     'account',
+   
+    'social.apps.django_app.default',
+    'rest_framework',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (

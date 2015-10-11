@@ -5,6 +5,15 @@ from django.conf import settings
 register = template.Library()
 
 @register.assignment_tag(takes_context=True)
+def athlete_info(context):
+    social = context['request'].user.social_auth.filter(
+            provider='strava',
+        ).first()
+    athlete = social.extra_data['athlete']
+    return athlete
+
+
+@register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
@@ -32,6 +41,7 @@ def top_menu(context, parent, calling_page=None):
         'menuitems': menuitems,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
+        'user': context['user'],
     }
 
 

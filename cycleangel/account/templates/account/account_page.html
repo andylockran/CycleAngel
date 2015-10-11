@@ -2,13 +2,35 @@
 
 {% load wagtailcore_tags %}
 
+{% load cycleangel_extras %}
+
 {% block content %}
 
-<div class="row col-md-12">
-	<h1>{{ user.get_full_name }}</h1>
-	<p>Welcome, {{user|capfirst}}</p>
-	{{self.body|richtext}}
-	<!--<pre>{% filter force_escape %}{% debug %}{% endfilter %}</pre> -->
-</div>
+{% if not user.is_authenticated %}
+	<div class="row col-md-12">
+		<h1>Please log in</h1>
+		<p>You have to be logged in to access this page</p>
+	</div>
+{% else %}
+	{% athlete_info as athlete %}
 
+	<div class="row">
+		<div class="col-md-8">
+			<h1>{{ user.get_full_name }}</h1>
+		</div>
+		<div class="col-md-2 col-offset-2">
+			<img src="{{athlete.profile}}" alt="user.firstname"/>
+		</div>
+		<div class="row col-md-12">
+		<h2>Athlete Information</h2>
+			<table class="table">
+			{% for key,value in athlete.items %}
+				<tr>
+					<td>{{key|capfirst}}</td><td>{{value}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+	</div>
+	{% endif %}
 {% endblock %}

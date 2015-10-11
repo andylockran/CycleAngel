@@ -152,7 +152,11 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_STRAVA_KEY = '4822'
 SOCIAL_AUTH_STRAVA_SECRET = '33afd96a1c2e40799b71b0b068ed8c9422067bd0'
 
-LOGIN_REDIRECT_URL = '/account'
+SOCIAL_AUTH_STRAVA_SCOPE = ['view_private']
+
+SOCIAL_AUTH_STRAVA_EXTRA_DATA = ['access_token','athlete']
+
+LOGIN_REDIRECT_URL = '/my-account'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

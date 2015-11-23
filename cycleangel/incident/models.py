@@ -13,8 +13,8 @@ from rest_framework import routers, serializers, viewsets
 class IncidentPage(Page):
 	time = models.DateTimeField()
 	location = GeopositionField()
-	reporter = models.ForeignKey(User, related_name="reporter",on_delete=models.SET_NULL)
-	assignee = models.ForeignKey(User, related_name="assignee",on_delete=models.SET_NULL)
+	reporter = models.ForeignKey(User, related_name="reporter",on_delete=models.SET_NULL,null=True)
+	assignee = models.ForeignKey(User, related_name="assignee",on_delete=models.SET_NULL,null=True)
 	message = models.TextField(max_length=400)
 	#request  # to be defined
 

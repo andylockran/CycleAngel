@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib import admin
 
@@ -5,15 +7,38 @@ from django.contrib import admin
 
 from django.contrib.auth.models import User
 
+from modelcluster.fields import ParentalKey
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+    MultiFieldPanel)
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from geoposition.fields import GeopositionField
 
 
 class AccountPage(Page):
-	pass
+	biography = RichTextField(blank=True)
 
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+class FormPage(AbstractEmailForm):
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+FormPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('intro', classname="full"),
+    InlinePanel('form_fields', label="Form fields"),
+    FieldPanel('thank_you_text', classname="full"),
+    MultiFieldPanel([
+        FieldPanel('to_address', classname="full"),
+        FieldPanel('from_address', classname="full"),
+        FieldPanel('subject', classname="full"),
+    ], "Email")
+]
 
 class Account(models.Model):
 	user = models.ForeignKey(User)

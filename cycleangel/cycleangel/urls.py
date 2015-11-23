@@ -5,8 +5,7 @@ from django.contrib import admin
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
-
-
+from cycleangel.router import router
 
 
 urlpatterns = [
@@ -15,9 +14,9 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^account/', include('account.urls')),
-
     url(r'^search/$', 'search.views.search', name='search'),
-
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
 

@@ -19,17 +19,23 @@
 			<h1>{{ user.get_full_name }}</h1>
 		</div>
 		<div class="col-md-2 col-offset-2">
-			<img src="{{athlete.profile}}" alt="user.firstname"/>
+			<img src="{{athlete.profile}}" alt="{{user.firstname}}"/>
 		</div>
 		<div class="row col-md-12">
-		<h2>Athlete Information</h2>
+			<h2>Athlete Information</h2>
+		</div>
+		<div class="row col-md-6">
 			<table class="table">
-			{% for key,value in athlete.items %}
 				<tr>
-					<td>{{key|capfirst}}</td><td>{{value}}</td>
+					<td>Name</td><td>{{user.get_full_name}}</td>
 				</tr>
-			{% endfor %}
+				<tr>
+					<td></td><td></td>
+				</tr>
 			</table>
+		</div>
+		<div class="row col-md-4 col-md-offset-1">
+		<em>Here's a little bit of a biography.</em>
 		</div>
 	</div>
 	{% endif %}

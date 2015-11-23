@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'taggit',
     'compressor',
     'modelcluster',
+    'geoposition',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
@@ -55,6 +56,7 @@ INSTALLED_APPS = (
     'contentPage',
     'account',
     'news',
+    'incident',
    
     'social.apps.django_app.default',
     'rest_framework',

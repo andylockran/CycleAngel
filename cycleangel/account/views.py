@@ -10,11 +10,9 @@ import datetime
 def index(request):
 	if request.user.is_authenticated():
 		items = Item.objects.filter(owner=request.user)
-		social = request.user.social_auth.filter(
-    		provider='strava',
-		).first()
-		a = social.extra_data['athlete']['profile_medium']
-		return render_to_response('account.html', {"items": items,"social": social,"image": image }, context_instance=RequestContext(request))
+		return render_to_response('account.html',
+			{"items": items,}, 
+			context_instance=RequestContext(request))
 	else:
 		return redirect('/') 
 

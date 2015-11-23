@@ -16,10 +16,18 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from geoposition.fields import GeopositionField
+from incident.models import Incident
+from incident.forms import IncidentForm
 
 
 class AccountPage(Page):
 	biography = RichTextField(blank=True)
+	def get_context(self, request):
+		context = super(AccountPage, self).get_context(request)
+		useruid = request.user.id
+		context['ReportedIncidents'] = Incident.objects.filter(reporter=useruid).order_by('-time')
+		return context
+
 
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')

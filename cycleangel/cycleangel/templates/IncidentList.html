@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+{% for incident in Incidents %}
+  <li><a href="/incident/{{incident.id}}">{{incident.title}} - {{incident.time}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

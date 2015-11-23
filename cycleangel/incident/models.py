@@ -1,41 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import User
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from geoposition.fields import GeopositionField
 from rest_framework import routers, serializers, viewsets
+from django.contrib import admin
 
 # Create your models here.
 
-class IncidentPage(Page):
-	time = models.DateTimeField()
-	location = GeopositionField()
-	reporter = models.ForeignKey(User, related_name="reporter",on_delete=models.SET_NULL,null=True)
-	assignee = models.ForeignKey(User, related_name="assignee",on_delete=models.SET_NULL,null=True)
-	message = models.TextField(max_length=400)
+class Incident(models.Model):
+    title = models.CharField(max_length=200)
+    time = models.DateTimeField()
+    location = GeopositionField()
+    reporter = models.ForeignKey(User, related_name="reporter",on_delete=models.SET_NULL,null=True)
+    assignee = models.ForeignKey(User, related_name="assignee",on_delete=models.SET_NULL,null=True)
+    message = models.TextField(max_length=400)
 	#request  # to be defined
+    def __str__(self):
+        return self.title
 
 
-
-IncidentPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('time', classname="full"),
-    FieldPanel('location', classname="full"),
-    FieldPanel('reporter', classname="full"),
-    FieldPanel('assignee', classname="full"),
-    FieldPanel('message', classname="full"),
-]
-
-
-class IncidentSerializer(serializers.HyperlinkedModelSerializer):
+class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = IncidentPage
-        fields = ('title', 'time', 'location', 'message')
+        model = Incident
+        fields = ('title', 'time', 'location', 'message','reporter')
 
 # ViewSets define the view behavior.
 class IncidentViewSet(viewsets.ModelViewSet):
-    queryset = IncidentPage.objects.all()
+    queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
+
+class IncidentAdmin(admin.ModelAdmin):
+    list_display = ('title','reporter')
+    list_filter = ('time',)
+
+admin.site.register(Incident,IncidentAdmin)

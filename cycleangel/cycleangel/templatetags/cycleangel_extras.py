@@ -1,6 +1,7 @@
 from datetime import date
 from django import template
 from django.conf import settings
+from incident.models import Incident
 
 register = template.Library()
 
@@ -12,7 +13,6 @@ def athlete_info(context):
     athlete = social.extra_data['athlete']
     return athlete
 
-
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
@@ -23,13 +23,13 @@ def get_site_root(context):
 def has_menu_children(page):
     return page.get_children().live().in_menu().exists()
 
-
 # Retrieves the top menu items - the immediate children of the parent page
 # The has_menu_children method is necessary because the bootstrap menu requires
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('cycleangel/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
+    messages = Incident.objects.all().order_by('-time')[:2]
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
         # We don't directly check if calling_page is None since the template
@@ -39,6 +39,7 @@ def top_menu(context, parent, calling_page=None):
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
+        'messages': messages,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
         'user': context['user'],

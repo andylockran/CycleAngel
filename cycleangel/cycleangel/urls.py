@@ -13,7 +13,7 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^account/', include('account.urls')),
+    url(r'^incident/', include('incident.urls')),
     url(r'^search/$', 'search.views.search', name='search'),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

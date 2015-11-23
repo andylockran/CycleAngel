@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+{% block content %}
+        <h1>{{ self.title }}</h1>
+        {{ self.intro|richtext }}
+        <form action="/incident/new/" method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+        {% endblock %}

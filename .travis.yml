@@ -3,10 +3,6 @@ language: python
 # Use container-based infrastructure
 sudo: false
 
-# Services
-services:
-  - elasticsearch
-
 # Package installation
 install:
   - pip install -r requirements.txt
@@ -16,7 +12,7 @@ install:
   #- python cycleangel/manage.py test
 
 script:
-  - "python cycleangel/manage.py test"
+  - "behave cycleangel/tests/cycleangel"
 
 # Who to notify about build results
 notifications:

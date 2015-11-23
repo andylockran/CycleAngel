@@ -1,0 +1,51 @@
+language: python
+cache: pip
+
+# Use container-based infrastructure
+sudo: false
+
+matrix:
+  include:
+   - env: TOXENV=py27-dj17-postgres
+   - env: TOXENV=py27-dj17-sqlite
+   - env: TOXENV=py27-dj17-mysql
+   - env: TOXENV=py33-dj17-postgres
+   - env: TOXENV=py34-dj17-postgres
+   - env: TOXENV=py34-dj17-sqlite
+   - env: TOXENV=py34-dj17-mysql
+   - env: TOXENV=py27-dj18-postgres
+#   - env: TOXENV=py27-dj18-mysql
+#   - env: TOXENV=py27-dj18-sqlite
+#  - env: TOXENV=py33-dj18-postgres
+   - env: TOXENV=py34-dj18-postgres
+   - env: TOXENV=py34-dj18-sqlite
+   - env: TOXENV=py34-dj18-mysql
+   - env: TOXENV=py35-dj18-postgres
+     python: 3.5
+   - env: TOXENV=py35-dj18-sqlite
+     python: 3.5
+   - env: TOXENV=py35-dj18-mysql
+     python: 3.5
+
+# Services
+services:
+  - elasticsearch
+
+# Package installation
+install:
+  - pip install -r requirements.txt
+
+# Pre-test configuration
+before_script:
+  - psql -c 'create database wagtaildemo;' -U postgres
+  - mysql -e "SET GLOBAL wait_timeout = 36000;"
+  - mysql -e "SET GLOBAL max_allowed_packet = 134209536;"
+
+# Who to notify about build results
+notifications:
+  email:
+    recipients:
+      - travis@zrmt.com
+    on_success: change
+    on_failure: always
+# bump Travis: 1

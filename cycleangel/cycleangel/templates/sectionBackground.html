@@ -1,0 +1,10 @@
+{% load wagtailimages_tags %}
+{% image self.background_image original as background %}
+<section id="{{title}}" class="container content-section text-center" style="background: url({{background.url}})"> 
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h2>{{self.title}}</h2>
+			{{ self.content }}
+		</div>
+	</div>
+</section>

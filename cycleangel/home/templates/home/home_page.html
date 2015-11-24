@@ -5,6 +5,23 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-	<h1>{{ self.title}}</h1>
-    {{ self.body }}
+<header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">{{self.title}}</h1>
+                        <p class="intro-text">Together, fewer punctures.</p>
+                        <a href="#about" class="btn btn-circle page-scroll pulse">
+                            <i class="fa fa-angle-double-down"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{{ self.body }}
+
+	
 {% endblock %}

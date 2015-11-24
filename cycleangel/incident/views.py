@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect 
+from django.shortcuts import render, HttpResponseRedirect , redirect
 from incident.forms import IncidentForm
 from incident.models import Incident
 from geoposition.fields import Geoposition

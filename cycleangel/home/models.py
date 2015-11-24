@@ -9,6 +9,7 @@ from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from cycleangel.blocks import SectionBlock, SectionBackgroundBlock
 
 
 class HomePage(Page):
@@ -16,6 +17,8 @@ class HomePage(Page):
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('section', SectionBlock()),
+        ('sectionBackground', SectionBackgroundBlock()),
     ])
 
     content_panels = Page.content_panels + [

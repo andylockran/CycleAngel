@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
+    replace = require('gulp-replace'),
     del = require('del'),
     browserSync =require('browser-sync');
 
@@ -26,7 +27,7 @@ var paths = {
         'bower_components/jquery/dist/jquery.js',
         'bower_components/jquery.easing/js/jquery.easing.js',
         'bower_components/bootstrap/dist/js/bootstrap.js',
-        'js/grayscale.js'
+        'assets/js/grayscale.js'
     ],
     images: ['assets/images/**/*'],
     fonts: [
@@ -35,10 +36,10 @@ var paths = {
     ],
 
     /* Output paths */
-    stylesOutput: 'styles',
-    scriptsOutput: 'js',
-    imagesOutput: 'images',
-    fontsOutput: 'fonts'
+    stylesOutput: '../static/styles',
+    scriptsOutput: '../static/js',
+    imagesOutput: '../static/images',
+    fontsOutput: '../static/fonts'
 };
 
 gulp.task('serve', ['styles', 'fonts','scripts'], () => {
@@ -59,7 +60,9 @@ gulp.task('serve', ['styles', 'fonts','scripts'], () => {
     'assets/images/**/*',
     'assets/fonts/**/*'
   ]).on('change', reload);
+});
 
+gulp.task('watch',['styles','scripts','fonts','images'], function() {
   gulp.watch('assets/styles/**/*.scss', ['styles']);
   gulp.watch('assets/fonts/**/*', ['fonts']);
   /*gulp.watch('bower.json', ['wiredep', 'fonts']); */
@@ -68,6 +71,7 @@ gulp.task('serve', ['styles', 'fonts','scripts'], () => {
 /* Tasks */
 gulp.task('styles', function() {
     return sass(paths.styles,{ style: 'expanded' })
+        .pipe(replace('fonts/glyphicons','static/fonts/glyphicons')) 
         .pipe(gulp.dest(paths.stylesOutput))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
@@ -76,10 +80,10 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
+	console.log(paths.scripts);
     return gulp.src(paths.scripts)
-     /*   .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('default'))
-     */   .pipe(concat('main.js'))
+        .pipe(gulp.dest(paths.scriptsOutput))
+        .pipe(concat('main.js'))
         .pipe(gulp.dest(paths.scriptsOutput))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())

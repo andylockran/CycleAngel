@@ -3,7 +3,9 @@
   "version": "1.0.1",
   "description": "The SASS version of StartBootstrap's Grayscale template, now with Gulp",
   "main": "Gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-replace": "^0.5.4"
+  },
   "devDependencies": {
     "connect": "^3.3.4",
     "connect-livereload": "^0.5.3",

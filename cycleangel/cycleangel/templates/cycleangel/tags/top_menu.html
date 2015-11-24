@@ -3,73 +3,35 @@
 {% load static %}
 
 {# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
-<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<nav role="navigation" class="navbar navbar-custom navbar-fixed-top">
+    <div class="container">       
         <div class="navbar-header">
             <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
             </button>
             {# Link to home page #}
             <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}" data-placement="bottom">
                 <i class="glyphicon glyphicon-home"></i> {{site_root.title}}
             </a>
         </div>
-        <div class="navbar-collapse collapse">
+      
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
-                
-            </ul>
-            <ul class="nav navbar-right top-nav">
-                
-
+            
             {% if user.is_authenticated %}
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            {% for msg in messages %}
-                            <a href="/incident/{{msg.id}}">
-                                <div class="media">
-
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        
-                                        <h5 class="media-heading"><strong>{{msg.title}}</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i>{{msg.time}}</p>
-                                        
-                                    </div>
-                                </div>
-                            </a>
-                            {% endfor %}
-                        </li>
-                        <li class="message-footer">
-                            <a href="/incident/#">See all incidents</a>
-                        </li>
-                    </ul>
-                </li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> My Account <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/my-account"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="/incident/new"><i class="fa fa-fw fa-envelope"></i>Create Request</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="{% url 'auth:logout' %}?next={{ request.path }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="/my-account"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="/incident/new"><i class="fa fa-fw fa-envelope"></i>Create Request</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{% url 'auth:logout' %}?next={{ request.path }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
                {% else %}
                 <li>
                    <a class="center-block" href="{% url 'social:begin' 'strava' %}?next={{ request.path }}">
@@ -77,21 +39,7 @@
                     </a>
                 </li>
                {% endif %}
-               </ul>
-               <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">                
-                    {% for menuitem in menuitems %}
-                    <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
-                        {% if menuitem.show_dropdown %}
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ menuitem.title }} <b class="caret"></b></a>
-                            {% top_menu_children parent=menuitem %}
-                        {% else %}
-                            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
-                        {% endif %}
-                    </li>       
-                {% endfor %}
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
-</div>
+</nav>
